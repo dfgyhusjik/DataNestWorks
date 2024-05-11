@@ -1,21 +1,16 @@
-function getPermutation(n, k) {
-  const nums = Array.from({ length: n }, (_, i) => i + 1);
-  let result = "";
-  let count = 0;
-  const backtrack = (current) => {
-    if (current.length === n) {
-      count++;
-      if (count === k) result = current.join("");
-      return;
+const quickSort = (arr) => {
+  if (arr.length <= 1) {
+    return arr;
+  }
+  const pivot = arr[arr.length - 1];
+  const left = [];
+  const right = [];
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i] < pivot) {
+      left.push(arr[i]);
+    } else {
+      right.push(arr[i]);
     }
-    if (count >= k) return;
-    for (const num of nums) {
-      if (current.includes(num)) continue;
-      current.push(num);
-      backtrack(current);
-      current.pop();
-    }
-  };
-  backtrack([]);
-  return result;
-}
+  }
+  return quickSort(left).concat(pivot, quickSort(right));
+};
