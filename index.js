@@ -1,16 +1,14 @@
-const quickSort = (arr) => {
-  if (arr.length <= 1) {
-    return arr;
-  }
-  const pivot = arr[arr.length - 1];
-  const left = [];
-  const right = [];
-  for (let i = 0; i < arr.length - 1; i++) {
-    if (arr[i] < pivot) {
-      left.push(arr[i]);
-    } else {
-      right.push(arr[i]);
+const selectionSort = (arr) => {
+  for (let i = 0; i < arr.length; i++) {
+    let minIndex = i;
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[j] < arr[minIndex]) {
+        minIndex = j;
+      }
+    }
+    if (minIndex !== i) {
+      [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
     }
   }
-  return quickSort(left).concat(pivot, quickSort(right));
+  return arr;
 };
